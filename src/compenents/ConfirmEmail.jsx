@@ -11,12 +11,12 @@ const ConfirmEmail = () => {
   const code = searchParams.get("code");
   
   useEffect(() => {
-    if (token) {
-      confirmEmail(token);
+    if (code) {
+      confirmEmail(code);
     }
-  }, [token]);
+  }, []);
 
-  const confirmEmail = async (token) => {
+  const confirmEmail = async (code) => {
     try {
       await axios.get(`https://syncspace.runasp.net/api/Auth/confirmEmail?userId=${userId}&code=${code}`)
       .then(response =>{

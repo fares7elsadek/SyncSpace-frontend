@@ -13,6 +13,7 @@ import CreateRoomPage from './pages/CreateRoom';
 import JoinRoomPage from './pages/JoinRoom';
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from './compenents/ProtectedRoute';
+import ConfirmEmail from './compenents/ConfirmEmail';
 
 
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path:"register",
     element:<Register/>
+  },
+  {
+    path:"confirm-email",
+    element:<ConfirmEmail />
   },
   {
     path:"login",
