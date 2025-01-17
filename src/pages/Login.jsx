@@ -1,11 +1,59 @@
 import logo from '../logo/logo.svg'
+import React, { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-
-
+const API_URL = "https://syncspace.runasp.net/api"
 const Login = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await axios.post(`${API_URL}/auth/login`, {
+          email,
+          password,
+        });
+        
+        const {token , avatar} = response.data.result;
+        console.log();
+        // Save tokens to localStorage or cookies
+        localStorage.setItem("accessToken", token);
+        localStorage.setItem("avatar",`/favatars/${avatar.split('\\')[6]}`);
+        toast.success("Loged in successfully", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "toast-container",
+          bodyClassName: "toast-body",
+          progressClassName: "toast-progress",
+        });
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
+      } catch (error) {
+        toast.error("Invalid credentials", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "toast-container",
+          bodyClassName: "toast-body",
+          progressClassName: "toast-progress",
+        });
+      }
+    };
     return (
       <>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
               alt="SyncSpace"
@@ -18,7 +66,7 @@ const Login = () => {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm/6 font-medium text-white">
                   Email address
@@ -28,6 +76,7 @@ const Login = () => {
                     id="email"
                     name="email"
                     type="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -51,6 +100,7 @@ const Login = () => {
                     id="password"
                     name="password"
                     type="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -70,12 +120,13 @@ const Login = () => {
   
             <p className="mt-10 text-center text-sm/6 text-gray-500">
               Not a member?{' '}
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+              <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">
                 Rigister
-              </a>
+              </Link>
             </p>
           </div>
         </div>
+      </div>
       </>
     )
   }

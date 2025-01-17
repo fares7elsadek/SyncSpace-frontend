@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axiosInstance from "../services/axiosInstance";
+import { set } from "zod";
+
+const API_URL = "https://syncspace.runasp.net/api"
 
 const Home = () => {
-  const [rooms, setRooms] = useState([
-    { id: 1, name: "Movie Night", members: 5, createdAt: "2025-01-10" },
-    { id: 2, name: "Study Group", members: 8, createdAt: "2025-01-15" },
-    { id: 3, name: "Gaming Session", members: 10, createdAt: "2025-01-12" },
-  ]);
-
-  const handleCreateRoom = () => {
-    alert("Create Room functionality here.");
-  };
-
-  const handleJoinRoom = () => {
-    alert("Join Room functionality here.");
-  };
+  const [rooms, setRooms] = useState([]);
+  
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await axiosInstance.get(`${API_URL}/room/user`);
+        let userRooms = response.data.result;
+        let UpdateRooms = [];
+        userRooms.map((room) =>{
+          let roomMap = {
+            name : room.roomName,
+            members : room.roomParticipants.length,
+            createdAt :new Date(room.createdAt).toLocaleString(),
+            id:room.roomId
+          }
+          UpdateRooms.push(roomMap);
+        });
+        setRooms(UpdateRooms);
+      } catch (error) {
+        console.error("Error fetching rooms:", error);
+      }
+    };
+  
+    fetchRooms(); // Call the async function
+  }, []);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 overflow-hidden relative">
@@ -35,18 +53,18 @@ const Home = () => {
               Stream your favorite content together with your friends in real time. Create, join, and explore rooms designed for collaborative fun!
             </p>
             <div className="flex space-x-4">
-              <button
-                onClick={handleCreateRoom}
+              <Link
+                to="/new-room"
                 className="rounded-md bg-blue-600 px-6 py-3 text-lg font-medium text-white hover:bg-blue-500 transition duration-300"
               >
                 Create Room
-              </button>
-              <button
-                onClick={handleJoinRoom}
+              </Link>
+              <Link
+                to="/join-room"
                 className="rounded-md bg-green-600 px-6 py-3 text-lg font-medium text-white hover:bg-green-500 transition duration-300"
               >
                 Join Room
-              </button>
+              </Link>
             </div>
 
             {/* Decorative Image */}
@@ -71,10 +89,7 @@ const Home = () => {
             ) : (
               <ul className="space-y-4 overflow-auto h-[400px] pr-2">
                 {rooms.map((room) => (
-                  <li
-                    key={room.id}
-                    className="rounded-lg bg-gray-700 hover:bg-gray-600 px-4 py-3 flex items-center justify-between shadow-lg transition duration-300"
-                  >
+                  <Link to={`/room/${room.id}`} className="rounded-lg bg-gray-700 hover:bg-gray-600 px-4 py-3 flex items-center justify-between shadow-lg transition duration-300">
                     <div>
                       <h3 className="text-lg font-medium">{room.name}</h3>
                       <p className="text-sm text-gray-400">
@@ -84,7 +99,7 @@ const Home = () => {
                     <span className="flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full text-sm font-bold text-white">
                       {room.members}
                     </span>
-                  </li>
+                </Link>
                 ))}
               </ul>
             )}
