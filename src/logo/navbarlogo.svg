@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="500" height="150" fill="none">
+  <!-- Play Button Icon -->
+  <circle cx="50" cy="50" r="30" fill="#1F8EF1" />
+  <polygon points="45,35 70,50 45,65" fill="#ffffff" />
+
+  <!-- Sync Waves -->
+  <path d="M100 50 Q120 30 140 50 T180 50 T220 50" stroke="#1F8EF1" stroke-width="4" fill="none" />
+
+  <!-- Text -->
+  <text x="100" y="70" fill="#ffffff" font-family="'Segoe UI', sans-serif" font-size="24" font-weight="bold">
+    SyncSpace
+  </text>
+</svg>
