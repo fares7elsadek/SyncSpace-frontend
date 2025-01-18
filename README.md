@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# SyncSpace Frontend  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the React frontend for **SyncSpace**, a streaming and chatting application that allows users to watch videos together in sync and communicate in real time. 
 
-## Available Scripts
 
-In the project directory, you can run:
+![SyncSpace](images/screen1.png)
 
-### `npm start`
+![SyncSpace](images/screen2.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features  
 
-### `npm test`
+- **Video Streaming**: Watch videos with friends in sync.  
+- **Real-time Chat**: Communicate seamlessly using SignalR for real-time updates.  
+- **Modern UI**: A clean and responsive interface built with React and TailwindCSS.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Getting Started  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow these instructions to set up and run the project locally.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites  
+- **Node.js** (v16 or above)  
+- **npm** or **yarn**  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation  
 
-### `npm run eject`
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/fares7elsadek/SyncSpace-frontend.git
+   cd syncspace-frontend
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies:  
+   ```bash
+   npm install
+   ```  
+   or  
+   ```bash
+   yarn install
+   ```  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Set up environment variables:  
+   Create a `.env` file in the root of the project and add the following variables:  
+   ```plaintext
+   REACT_APP_API_URL=<Backend API URL>
+   REACT_APP_SIGNALR_URL=<SignalR Hub URL>
+   ```  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running the Application  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Start the development server:  
+```bash
+npm start
+```  
+or  
+```bash
+yarn start
+```  
 
-## Learn More
+The application will be available at `http://localhost:3000`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure  
 
-### Code Splitting
+```
+src  
+├── components        // Reusable UI components  
+├── pages             // Main pages of the application  
+├── services          // API and SignalR service integrations  
+├── context           // Context providers for global state management  
+├── utils             // Utility functions  
+├── styles            // TailwindCSS configurations and custom styles  
+```  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Built With  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **React** - Frontend framework  
+- **TailwindCSS** - Utility-first CSS framework for styling  
+- **React Router** - Client-side routing  
+- **Axios** - HTTP client for API calls  
+- **SignalR** - Real-time communication  
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## TailwindCSS Configuration  
 
-### Advanced Configuration
+The project uses **TailwindCSS** for styling. Tailwind is pre-configured in the project, but you can customize it by modifying the `tailwind.config.js` file.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Example TailwindCSS Setup  
 
-### Deployment
+To extend or customize the theme, edit `tailwind.config.js`:  
+```javascript
+module.exports = {
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1DA1F2',
+        secondary: '#14171A',
+      },
+    },
+  },
+  plugins: [],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Contributing  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome!  
+
+1. Fork the repository  
+2. Create your feature branch: `git checkout -b feature-name`  
+3. Commit your changes: `git commit -m "Add some feature"`  
+4. Push to the branch: `git push origin feature-name`  
+5. Open a pull request  
+
+---
+
+## License  
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments  
+
+Special thanks to **Abdullah Yosry** for his amazing work on the frontend development of this project.  
+
+---
+
+Let me know if you'd like any other additions or customizations!
