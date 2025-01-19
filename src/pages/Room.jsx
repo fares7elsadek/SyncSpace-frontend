@@ -83,9 +83,6 @@ const RoomPage = () => {
       const handleStreamStarted = (streamUrl) => {
         setVideoUrl(streamUrl);
         setIsPlaying(true);
-        if (playerRef.current) {
-          playerRef.current.seekTo(0, "seconds");
-        }
       };
 
 
