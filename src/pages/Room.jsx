@@ -85,6 +85,11 @@ const RoomPage = () => {
         setIsPlaying(true);
       };
 
+      setInterval(() => {
+        let time = playerRef.current.getCurrentTime();
+        connection.invoke("UpdateCurrentTime",time,roomId);
+      }, 3000);
+
 
       const handleReceiveMessage = (message) => {
         setMessages((prevMessages) => [...prevMessages, message]);
