@@ -31,7 +31,7 @@ const Login = () => {
           progressClassName: "toast-progress",
         });
         setTimeout(() => {
-          window.location.href = "/";
+          navigate("/");
         }, 3000);
       } catch (error) {
         toast.error("Invalid credentials", {
